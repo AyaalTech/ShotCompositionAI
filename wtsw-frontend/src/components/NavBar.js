@@ -1,4 +1,3 @@
-import ScrollToTop from './ScrollToTop';
 import './NavBar.css';
 
 const Navbar = () => {
@@ -11,12 +10,10 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <ScrollToTop />
-      <div className="nav-items">
-        <span onClick={() => scrollToSection('section1')}>Lorem</span>
-        <span onClick={() => scrollToSection('section2')}>Ipsum</span>
-        <span onClick={() => scrollToSection('section3')}>Dorem</span>
-      </div>
+      <img src="/wtsw.png" alt="WT Logo" style={{ width: '3rem' }} />
+      <span onClick={() => scrollToSection('section1')}>Starting</span>
+      <span onClick={() => scrollToSection('section2')}>Analysis</span>
+      <span onClick={() => scrollToSection('section3')}>Guides</span>
     </nav>
   );
 };

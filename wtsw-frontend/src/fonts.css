@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Obrazec 2.0';
+    src: url('../public/Covid19.ttf') format('truetype');
+    font-weight: bold;
+  }
+  
+  @font-face {
+    font-family: 'Covid19';
+    src: url('../public/Obrazec-2.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Raleway';
+    src: url('../public/Raleway-Bold.ttf') format('truetype');
+    font-weight: bold;
+  }
+  
+  @font-face {
+    font-family: 'Raleway';
+    src: url('../public/Raleway-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Raleway';
+    src: url('../public/Raleway-Italic.ttf') format('truetype');
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Raleway';
+    src: url('../public/Raleway-Regular.ttf') format('truetype');
+  }

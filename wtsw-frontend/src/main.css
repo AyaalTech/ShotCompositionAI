@@ -1,0 +1,13 @@
+body {
+	height: 100%;
+    width: 100%;
+	background-color: #CCD0D8;
+}
+
+p {
+    color: #1D2023;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #1D2023;
+}

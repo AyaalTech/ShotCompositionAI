@@ -12,8 +12,9 @@ const Navbar = () => {
     <nav className="navbar">
       <img src="/wtsw.png" alt="WT Logo" style={{ width: '3rem' }} />
       <span onClick={() => scrollToSection('section1')}>Starting</span>
-      <span onClick={() => scrollToSection('section2')}>Analysis</span>
-      <span onClick={() => scrollToSection('section3')}>Guides</span>
+      <span onClick={() => scrollToSection('section2')}>Upload</span>
+      <span onClick={() => scrollToSection('section3')}>Analysis</span>
+      <span onClick={() => scrollToSection('section4')}>Guides</span>
     </nav>
   );
 };

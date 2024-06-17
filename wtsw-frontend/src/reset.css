@@ -28,11 +28,18 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
-	background-color: #CCD0D8;
-	box-shadow: inset 0px 0px 10px rgba(29, 32, 35, 0.5);
+html {
+	height: 100%;
+    width: 100%;
 }
+
+body {
+	height: 100%;
+    width: 100%;
+	background-color: #CCD0D8;
+	box-shadow: inset 0px 0px 10px 5px rgba(29, 32, 35, 0.5); 
+}
+
 ol, ul {
 	list-style: none;
 }

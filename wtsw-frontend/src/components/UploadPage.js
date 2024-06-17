@@ -27,12 +27,15 @@ function UploadPage() {
   };
 
   return (
-    <div className="upload-page" style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-      <h1>Upload Image</h1>
-      <p>Upload an image for prediction</p>
-      <form onSubmit={handleSubmit}>
-        <input type="file" accept="image/*" onChange={handleImageChange} style={{ marginBottom: '20px' }} />
-        <button type="submit" style={{ padding: '10px 20px', fontSize: '16px', backgroundColor: 'blue', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Upload</button>
+    <div className="upload-page" style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '2vh'}}>
+      <h1 style={{fontFamily: "'Obrazec 2.0'", fontSize: '3em'}}>Upload An Image</h1>
+      <p style={{fontFamily: "'Covid19'", fontSize: '2em'}}>for ai to think about</p>
+      <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+        <label htmlFor="file-upload" style={{cursor: 'pointer', marginBottom: '1vh', fontFamily: "'Raleway'", padding: '10px 20px', backgroundColor: '#1463F3', color: '#CCD0D8', border: 'none', borderRadius: '5px'}}>
+            📂 Browse Files
+        </label>
+        <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}} />
+        <button type="submit" style={{fontFamily: "'Raleway'", width: '12vw', padding: '10px 20px', fontSize: '1em', backgroundColor: '#1D2023', color: '#CCD0D8', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>🦾 Upload</button>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function UploadPage({ setHasUploaded, setResponseData }) {
+function UploadPage({ setHasUploaded, setResponseData, setSelectedData }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleImageChange = event => {
@@ -24,6 +24,7 @@ function UploadPage({ setHasUploaded, setResponseData }) {
       });
       console.log(response.data);
       setResponseData(response.data);
+      setSelectedData(response.data);
       setHasUploaded(true);
     } catch (error) {
       console.error(error);

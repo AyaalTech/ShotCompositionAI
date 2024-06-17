@@ -14,7 +14,6 @@ const Navbar = () => {
       <span onClick={() => scrollToSection('section1')}>Starting</span>
       <span onClick={() => scrollToSection('section2')}>Upload</span>
       <span onClick={() => scrollToSection('section3')}>Analysis</span>
-      <span onClick={() => scrollToSection('section4')}>Guides</span>
     </nav>
   );
 };

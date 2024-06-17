@@ -147,6 +147,9 @@ history = model.fit(X_img_train, {
     'Lens': y_test_dict['Lens']
 }))
 
+# Save the model
+model.save('multi_output_model.keras')
+
 # Plot the training history
 plt.figure(figsize=(12, 8))
 for output_name in y_train_dict.keys():

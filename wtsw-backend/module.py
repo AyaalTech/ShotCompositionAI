@@ -4,6 +4,8 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 import pandas as pd
+import sys
+import os
 
 # Load the trained model
 model = load_model('multi_output_model.keras')
@@ -33,7 +35,6 @@ def preprocess_image(image_path):
 # Decode the predictions
 def decode_predictions(predictions):
     decoded_preds = {}
-    # Inverse transform the scaled numerical predictions
     numerical_predictions = np.array([
         predictions[0][0][0],
         predictions[1][0][0],
@@ -41,14 +42,13 @@ def decode_predictions(predictions):
         predictions[3][0][0],
         predictions[4][0][0]
     ]).reshape(1, -5)
-    numerical_predictions = scaler.inverse_transform(numerical_predictions)[0]
+    numerical_predictions = scaler.inverse_transform(numerical_predictions)[0].tolist()  
     decoded_preds['Focal_Length'] = numerical_predictions[0]
     decoded_preds['Lighting_Temperature'] = numerical_predictions[1]
     decoded_preds['Aperture'] = numerical_predictions[2]
     decoded_preds['Focus_Distance'] = numerical_predictions[3]
     decoded_preds['ISO'] = numerical_predictions[4]
 
-    # Handle categorical predictions
     for i, key in enumerate(['Shot_Type', 'INT_EXT', 'Camera_Model', 'Composition_Techniques', 'Filter_Used', 'Lens']):
         prediction = np.argmax(predictions[i + 5][0])
         if prediction < len(label_encoders[key].classes_):
@@ -59,13 +59,16 @@ def decode_predictions(predictions):
     return decoded_preds
 
 # Function to predict shot attributes
-def predict_shot_attributes(image_path):
+def predict_shot_attributes(image_filename):
+    image_path = os.path.join('uploads', image_filename)
     preprocessed_image = preprocess_image(image_path)
     predictions = model.predict(preprocessed_image)
     decoded_predictions = decode_predictions(predictions)
     return decoded_predictions
 
-# Test the function
-image_path = '1917.jpg'
-predictions = predict_shot_attributes(image_path)
-print(predictions)
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description='Predict shot attributes.')
+    parser.add_argument('--image', type=str, required=True, help='Image filename')
+    args = parser.parse_args()
+    print(predict_shot_attributes(args.image))

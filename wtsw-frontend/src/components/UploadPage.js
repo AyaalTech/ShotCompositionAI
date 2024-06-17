@@ -2,32 +2,34 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function UploadPage() {
-  const [image, setImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
-  };
+    const handleImageChange = event => {
+        setSelectedFile(event.target.files[0]);
+    };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append('image', image);
-
-    try {
-      const response = await axios.post('http://localhost:5000/predict', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+    const handleSubmit = async event => {
+        event.preventDefault();
+        if (!selectedFile) {
+            alert("Please select an image");
+            return;
         }
-      });
-      console.log('Predictions:', response.data);
-
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
+        try {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            const response = await axios.post('http://localhost:5000/predict', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
   };
 
   return (
-    <div className="upload-page" style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '2vh'}}>
+    <div className="upload-page" style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '2vh', background: `radial-gradient(circle, rgb(20,99,243) 0%, rgb(204,208,216) 20%)`}}>
       <h1 style={{fontFamily: "'Obrazec 2.0'", fontSize: '3em'}}>Upload An Image</h1>
       <p style={{fontFamily: "'Covid19'", fontSize: '2em'}}>for ai to think about</p>
       <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>

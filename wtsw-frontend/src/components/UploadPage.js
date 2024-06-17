@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function UploadPage() {
+function UploadPage({ setHasUploaded, setResponseData }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
-    const handleImageChange = event => {
-        setSelectedFile(event.target.files[0]);
-    };
+  const handleImageChange = event => {
+    setSelectedFile(event.target.files[0]);
+  };
 
-    const handleSubmit = async event => {
-        event.preventDefault();
-        if (!selectedFile) {
-            alert("Please select an image");
-            return;
+  const handleSubmit = async event => {
+    event.preventDefault();
+    if (!selectedFile) {
+      alert("Please select an image");
+      return;
+    }
+    try {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      const response = await axios.post('http://localhost:5000/predict', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
-        try {
-            const formData = new FormData();
-            formData.append('file', selectedFile);
-            const response = await axios.post('http://localhost:5000/predict', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            console.log(response.data);
-        } catch (error) {
-            console.error(error);
-        }
+      });
+      console.log(response.data);
+      setResponseData(response.data);
+      setHasUploaded(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -34,7 +36,7 @@ function UploadPage() {
       <p style={{fontFamily: "'Covid19'", fontSize: '2em'}}>for ai to think about</p>
       <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <label htmlFor="file-upload" style={{cursor: 'pointer', marginBottom: '1vh', fontFamily: "'Raleway'", padding: '10px 20px', backgroundColor: '#1463F3', color: '#CCD0D8', border: 'none', borderRadius: '5px'}}>
-            📂 Browse Files
+            📂 Choose File
         </label>
         <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{display: 'none'}} />
         <button type="submit" style={{fontFamily: "'Raleway'", width: '12vw', padding: '10px 20px', fontSize: '1em', backgroundColor: '#1D2023', color: '#CCD0D8', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>🦾 Upload</button>

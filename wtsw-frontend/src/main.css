@@ -2,6 +2,7 @@ body {
 	height: 100%;
     width: 100%;
 	background-color: #CCD0D8;
+    scroll-behavior: smooth;
 }
 
 p {
